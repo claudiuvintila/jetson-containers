@@ -12,11 +12,12 @@ ENV PYTHONIOENCODING=utf-8
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-		  python3-dev \
+		  python3.8-dev \
 		  python3-pip \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get clean && \
     which pip3 && pip3 --version && \
+    update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.8 1 && \
     python3 -m pip install --upgrade pip && \
     \
     which python || python --version || pip --version || \
@@ -25,7 +26,7 @@ RUN apt-get update && \
     pip3 install --upgrade --no-cache-dir \
 	 setuptools \
 	 packaging \
-	 'Cython<3' \
+	 'Cython' \
 	 wheel && \
     \
     pip3 install --no-cache-dir --verbose wget psutil
