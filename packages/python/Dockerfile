@@ -36,6 +36,18 @@ RUN apt-get update && \
 
 SHELL ["/bin/bash", "-c"]
 
+# cmake
+RUN apt-get update && \
+    apt-get install -y protobuf-compiler libprotobuf-dev openssl libssl-dev libcurl4-openssl-dev && \
+    cd /opt && \
+    wget https://github.com/Kitware/CMake/releases/download/v3.13.5/cmake-3.13.5.tar.gz && \
+    tar xvf cmake-3.13.5.tar.gz > /dev/null && \
+    cd cmake-3.13.5 && \
+    ./bootstrap --system-curl && \
+    make -j$(nproc) && \
+    make install && \
+    cd ..
+
 # prepare headers
 RUN cd /opt && \
     mkdir python${PY_VERSION} && \
