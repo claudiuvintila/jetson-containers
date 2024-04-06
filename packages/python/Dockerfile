@@ -38,10 +38,7 @@ RUN apt-get update && \
 RUN cd /opt && \
     mkdir python${PY_VERSION} && \
     mkdir python${PY_VERSION}/include && \
-    wget http://ftp.us.debian.org/debian/pool/main/p/python${PY_VERSION}/libpython${PY_VERSION}-dev_${PYTHON_VERSION}-1_arm64.deb && \
-    ar x libpython${PY_VERSION}-dev_${PYTHON_VERSION}-1_arm64.deb && \
-    tar -xvf data.tar.xz && \
-    cp ./usr/include/aarch64-linux-gnu/python${PY_VERSION}/pyconfig.h python${PY_VERSION}/include/ && \
+    cp /usr/include/aarch64-linux-gnu/python${PY_VERSION}/pyconfig.h python${PY_VERSION}/include/ && \
     cp -r Python-${PYTHON_VERSION}/Include/* python${PY_VERSION}/include/ && \
     ls -las
 
@@ -57,9 +54,13 @@ RUN cd /opt && \
     cd TensorRT && \
     git submodule update --init --recursive && \
     cd python && \
-    cp ./build.sh ./build.sh.old && \
-    mv /opt/build.sh ./build.sh && \
-    TRT_OSSPATH=${PWD}/.. EXT_PATH=${PWD}/../.. ./build.sh && \
+    PYTHON_MAJOR_VERSION=3 && \
+    PYTHON_MINOR_VERSION=8 && \
+    TARGET=aarch64 && \
+    TARGET=aarch64 && \
+    TRT_OSSPATH=${PWD}/.. && \
+    EXT_PATH=${PWD}/../.. && \
+    ./build.sh && \
     python${PY_VERSION} -m pip install build/dist/tensorrt-8.0.1.6-cp${PY_VERSION/./}-none-linux_aarch64.whl && \
     cd ../..
 
