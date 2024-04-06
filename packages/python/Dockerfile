@@ -39,7 +39,7 @@ RUN cd /opt && \
     mkdir python${PY_VERSION} && \
     mkdir python${PY_VERSION}/include && \
     find / -name pyconfig.h && \
-    cp "/usr/include/python3.6/pyconfig.h" "python${PY_VERSION}/include/" && \
+    cp "/usr/include/aarch64-linux-gnu/python3.8/pyconfig.h" "python${PY_VERSION}/include/" && \
     wget https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tgz && \
     tar xzf Python-${PYTHON_VERSION}.tgz > /dev/null && \
     cp -r Python-${PYTHON_VERSION}/Include/* python${PY_VERSION}/include/ && \
