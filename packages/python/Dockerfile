@@ -16,12 +16,12 @@ RUN apt-get update && \
 		  python3-pip \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get clean && \
-    which pip3 && pip3 --version && \
     update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.8 1 && \
     python3 -m pip install --upgrade pip && \
     \
     which python || python --version || pip --version || \
     which python3 || python3 --version || pip3 --version && \
+    which pip3 && pip3 --version && \
     \
     pip3 install --upgrade --no-cache-dir \
 	 setuptools \
