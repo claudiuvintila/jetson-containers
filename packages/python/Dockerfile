@@ -50,7 +50,7 @@ RUN cd /opt && \
 
 
 # tensorrt
-COPY ./docker/tensorrt/scripts/build.sh /opt/build.sh
+#COPY ./docker/tensorrt/scripts/build.sh /opt/build.sh
 RUN cd /opt && \
     git clone https://github.com/pybind/pybind11.git && \
     git clone -b release/8.0 https://github.com/NVIDIA/TensorRT.git && \
