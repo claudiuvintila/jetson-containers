@@ -28,6 +28,7 @@ RUN apt-get update && \
     \
     pip3 install --upgrade --no-cache-dir \
 	 setuptools \
+	 distutils \
 	 packaging \
 	 'Cython' \
 	 wheel && \
