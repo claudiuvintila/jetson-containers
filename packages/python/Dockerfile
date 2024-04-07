@@ -8,18 +8,18 @@
 ARG BASE_IMAGE
 FROM ${BASE_IMAGE}
 
-ARG PYTHON_VERSION=3.8.0
+ARG PYTHON_VERSION=3.8.2
 ARG PY_VERSION=3.8
 
 ENV PYTHONIOENCODING=utf-8
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-		  python3.8-dev \
+		  python${PY_VERSION}-dev \
 		  python3-pip \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get clean && \
-    update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.8 1 && \
+    update-alternatives --install /usr/bin/python3 python3 /usr/bin/python${PY_VERSION} 1 && \
     python3 -m pip install --upgrade pip && \
     \
     which python || python --version || pip --version || \
@@ -52,8 +52,8 @@ RUN apt-get update && \
 RUN cd /workspace && \
     mkdir python${PY_VERSION} && \
     mkdir python${PY_VERSION}/include && \
-    wget http://launchpadlibrarian.net/452788451/libpython${PY_VERSION}-dev_${PYTHON_VERSION}-5_arm64.deb && \
-    ar x libpython${PY_VERSION}-dev_${PYTHON_VERSION}-5_arm64.deb && \
+    apt-get download libpython${PY_VERSION}-dev && \
+    ar x libpython${PY_VERSION}-dev_${PYTHON_VERSION}-*_arm64.deb && \
     tar -xvf data.tar.xz && \
     cp ./usr/include/aarch64-linux-gnu/python${PY_VERSION}/pyconfig.h python${PY_VERSION}/include/ && \
     wget https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tgz && \
@@ -62,7 +62,7 @@ RUN cd /workspace && \
     ls -las
 
 # cleanup headers
-#RUN rm -rf libpython${PY_VERSION}-dev_${PYTHON_VERSION}-1_arm64.deb data.tar.xz control.tar.xz debian-binary
+#RUN rm -rf libpython${PY_VERSION}-dev_${PYTHON_VERSION}-*_arm64.deb data.tar.xz control.tar.xz debian-binary
 
 
 # tensorrt
