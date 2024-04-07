@@ -43,7 +43,7 @@ RUN apt-get update \
     && apt-get install kitware-archive-keyring -y \
     && apt-get install cmake -y
 
-RUN pip3 install --upgrade setuptools pip wheel \
+RUN pip3 install --upgrade setuptools==59.5.0 pip wheel \
   && pip3 install MarkupSafe==2.0.0 Cython==0.29.37
 
 RUN git clone --depth 1 --branch v${TORCH_VERSION} https://github.com/pytorch/pytorch \

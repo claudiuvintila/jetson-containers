@@ -28,7 +28,7 @@ RUN apt-get update && \
     which pip3 && pip3 --version && \
     \
     pip3 install --upgrade --no-cache-dir \
-	 setuptools \
+	 setuptools==59.5.0 \
 	 packaging \
 	 'Cython' \
 	 wheel && \
