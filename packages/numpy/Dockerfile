@@ -9,7 +9,7 @@ FROM ${BASE_IMAGE}
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-		  python3-numpy \
+		  python3.8-numpy \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get clean
     
