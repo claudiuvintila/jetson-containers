@@ -20,19 +20,19 @@ ARG TORCH_VERSION=1.10.0
 
 COPY --from=tonistiigi/xx / /
 
-RUN if [ "$(xx-info march)" = 'aarch64' ]; then \
-      apt-get update \
-        && apt-get install -y wget \
-        && wget http://ports.ubuntu.com/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_$(xx-info pkg-arch).deb \
-        && apt-get install ./libssl1.1_1.1.1f-1ubuntu2_$(xx-info pkg-arch).deb \
-        && rm ./libssl1.1_1.1.1f-1ubuntu2_$(xx-info pkg-arch).deb; \
-    else \
-      apt-get update \
-        && apt-get install -y wget \
-        && wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_amd64.deb \
-        && apt-get install ./libssl1.1_1.1.1f-1ubuntu2_amd64.deb \
-        && rm ./libssl1.1_1.1.1f-1ubuntu2_amd64.deb; \
-    fi
+#RUN if [ "$(xx-info march)" = 'aarch64' ]; then \
+#      apt-get update \
+#        && apt-get install -y wget \
+#        && wget http://ports.ubuntu.com/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_$(xx-info pkg-arch).deb \
+#        && apt-get install ./libssl1.1_1.1.1f-1ubuntu2_$(xx-info pkg-arch).deb \
+#        && rm ./libssl1.1_1.1.1f-1ubuntu2_$(xx-info pkg-arch).deb; \
+#    else \
+#      apt-get update \
+#        && apt-get install -y wget \
+#        && wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_amd64.deb \
+#        && apt-get install ./libssl1.1_1.1.1f-1ubuntu2_amd64.deb \
+#        && rm ./libssl1.1_1.1.1f-1ubuntu2_amd64.deb; \
+#    fi
 
 RUN apt-get update \
     && apt-get install -y wget curl git gpg \
