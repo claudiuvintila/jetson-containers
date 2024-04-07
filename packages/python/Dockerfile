@@ -83,7 +83,7 @@ RUN cd /workspace && \
     python${PY_VERSION} -m pip install build/dist/tensorrt-8.0.1.6-cp${PY_VERSION/./}-none-linux_aarch64.whl && \
     cd ../..
 
-WORKDIN /
+WORKDIR /
 # this was causing issues downstream (e.g. Python2.7 still around in Ubuntu 18.04,
 # and in cmake python enumeration where some packages expect that 'python' is 2.7)
 #RUN update-alternatives --install /usr/bin/python python /usr/bin/python3 1 && \
