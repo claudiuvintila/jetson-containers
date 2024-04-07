@@ -8,7 +8,7 @@
 ARG BASE_IMAGE
 FROM ${BASE_IMAGE}
 
-ARG PYTHON_VERSION=3.8.9
+ARG PYTHON_VERSION=3.8.0
 ARG PY_VERSION=3.8
 
 ENV PYTHONIOENCODING=utf-8
@@ -53,8 +53,10 @@ RUN apt-get update && \
 RUN cd /workspace && \
     mkdir python${PY_VERSION} && \
     mkdir python${PY_VERSION}/include && \
-    find / -name pyconfig.h && \
-    cp "/usr/include/aarch64-linux-gnu/python3.8/pyconfig.h" "python${PY_VERSION}/include/" && \
+    wget http://launchpadlibrarian.net/452788451/libpython${PY_VERSION}-dev_${PYTHON_VERSION}-5_arm64.deb && \
+    ar x libpython${PY_VERSION}-dev_${PYTHON_VERSION}-5_arm64.deb && \
+    tar -xvf data.tar.xz && \
+    cp ./usr/include/aarch64-linux-gnu/python${PY_VERSION}/pyconfig.h python${PY_VERSION}/include/ && \
     wget https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tgz && \
     tar xzf Python-${PYTHON_VERSION}.tgz > /dev/null && \
     cp -r Python-${PYTHON_VERSION}/Include/* python${PY_VERSION}/include/ && \
