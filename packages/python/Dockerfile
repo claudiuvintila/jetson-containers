@@ -16,7 +16,6 @@ ENV PYTHONIOENCODING=utf-8
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
 		  python${PY_VERSION}-dev \
-		  python${PY_VERSION}-distutils \
 		  python3-pip \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get clean && \
