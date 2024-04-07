@@ -18,6 +18,8 @@ ARG PYTORCH_URL
 ARG PYTORCH_WHL
 ARG TORCH_VERSION=1.10.0
 
+COPY --from=tonistiigi/xx / /
+
 RUN if [ "$(xx-info march)" = 'aarch64' ]; then \
       apt-get update \
         && apt-get install -y wget \
