@@ -8,8 +8,8 @@
 ARG BASE_IMAGE
 FROM ${BASE_IMAGE}
 
-ARG PYTHON_VERSION=3.6.9
-ARG PY_VERSION=3.6
+ARG PYTHON_VERSION=3.8.9
+ARG PY_VERSION=3.8
 
 ENV PYTHONIOENCODING=utf-8
 
@@ -35,7 +35,7 @@ RUN apt-get update && \
     pip3 install --no-cache-dir --verbose wget psutil
 
 SHELL ["/bin/bash", "-c"]
-
+RUN exit 1
 # cmake
 RUN apt-get update && \
     apt-get install -y protobuf-compiler libprotobuf-dev openssl libssl-dev libcurl4-openssl-dev && \
