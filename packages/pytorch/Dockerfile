@@ -69,8 +69,7 @@ RUN apt-get update && \
     \
     # download and install the PyTorch wheel
     cd /opt && \
-    wget --quiet --show-progress --progress=bar:force:noscroll --no-check-certificate ${PYTORCH_URL} -O ${PYTORCH_WHL} && \
-    pip3 install --verbose ${PYTORCH_WHL} && \
+    pip3 install dist/torch-${TORCH_VERSION}-cp${PY_VERSION}-cp${PY_VERSION}-linux_$(xx-info march).whl && \
     python3 -c 'import torch; print(f"PyTorch version: {torch.__version__}"); print(f"CUDA available:  {torch.cuda.is_available()}"); print(f"cuDNN version:   {torch.backends.cudnn.version()}"); print(torch.__config__.show());' && \
     \
     # patch for https://github.com/pytorch/pytorch/issues/45323
