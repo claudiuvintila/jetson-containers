@@ -39,7 +39,8 @@ SHELL ["/bin/bash", "-c"]
 # cmake
 RUN apt-get update && \
     apt-get install -y protobuf-compiler libprotobuf-dev openssl libssl-dev libcurl4-openssl-dev && \
-    cd /opt && \
+    mkdir /workspace && \
+    cd /workspace && \
     wget https://github.com/Kitware/CMake/releases/download/v3.13.5/cmake-3.13.5.tar.gz && \
     tar xvf cmake-3.13.5.tar.gz > /dev/null && \
     cd cmake-3.13.5 && \
@@ -49,7 +50,7 @@ RUN apt-get update && \
     cd ..
 
 # prepare headers
-RUN cd /opt && \
+RUN cd /workspace && \
     mkdir python${PY_VERSION} && \
     mkdir python${PY_VERSION}/include && \
     find / -name pyconfig.h && \
@@ -65,7 +66,7 @@ RUN cd /opt && \
 
 # tensorrt
 #COPY ./docker/tensorrt/scripts/build.sh /opt/build.sh
-RUN cd /opt && \
+RUN cd /workspace && \
     git clone https://github.com/pybind/pybind11.git && \
     git clone -b release/8.0 https://github.com/NVIDIA/TensorRT.git && \
     cd TensorRT && \
