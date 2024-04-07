@@ -20,5 +20,5 @@ FROM ${BASE_IMAGE}
 #	   pip3 install --upgrade --no-cache-dir --verbose protobuf; \
 #    fi
     
-RUN pip3 install --upgrade --no-cache-dir --verbose numpy &&\
+RUN pip3 install --upgrade --no-cache-dir --verbose protobuf &&\
     pip3 show protobuf && protoc --version
