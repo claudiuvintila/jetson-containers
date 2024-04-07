@@ -20,5 +20,5 @@ FROM ${BASE_IMAGE}
 #	   pip3 install --upgrade --no-cache-dir --verbose protobuf; \
 #    fi
     
-RUN pip3 install --upgrade --no-cache-dir --verbose protobuf &&\
+RUN pip3 install --upgrade --no-cache-dir --verbose protobuf==3.20.* &&\
     pip3 show protobuf && protoc --version
