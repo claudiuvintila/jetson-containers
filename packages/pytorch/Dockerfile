@@ -36,7 +36,8 @@ COPY --from=tonistiigi/xx / /
 #        && rm ./libssl1.1_1.1.1f-1ubuntu2_amd64.deb; \
 #    fi
 
-RUN apt-get update \
+RUN cd /opt && \
+    apt-get update \
     && apt-get install -y wget curl git gpg \
     && wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | tee /usr/share/keyrings/kitware-archive-keyring.gpg >/dev/null \
     && echo 'deb [signed-by=/usr/share/keyrings/kitware-archive-keyring.gpg] https://apt.kitware.com/ubuntu/ bionic main' | tee /etc/apt/sources.list.d/kitware.list >/dev/null \
@@ -48,7 +49,8 @@ RUN apt-get update \
 RUN pip3 install --upgrade setuptools==59.5.0 pip wheel \
   && pip3 install MarkupSafe==2.0.0 Cython==0.29.37
 
-RUN git clone --depth 1 --branch v${TORCH_VERSION} https://github.com/pytorch/pytorch \
+RUN cd /opt && \
+    git clone --depth 1 --branch v${TORCH_VERSION} https://github.com/pytorch/pytorch \
     && cd pytorch \
     && git submodule sync \
     && git submodule update --init --recursive \
@@ -71,7 +73,8 @@ RUN apt-get update && \
     \
     # download and install the PyTorch wheel
     cd /opt && \
-    pip3 install dist/torch-${TORCH_VERSION}-cp${PY_VERSION}-cp${PY_VERSION}-linux_$(xx-info march).whl && \
+    ls -las pytorch/dist && \
+    pip3 install pytorch/dist/torch-${TORCH_VERSION}-cp${PY_VERSION/./}-cp${PY_VERSION/./}-linux_$(xx-info march).whl && \
     python3 -c 'import torch; print(f"PyTorch version: {torch.__version__}"); print(f"CUDA available:  {torch.cuda.is_available()}"); print(f"cuDNN version:   {torch.backends.cudnn.version()}"); print(torch.__config__.show());' && \
     \
     # patch for https://github.com/pytorch/pytorch/issues/45323
