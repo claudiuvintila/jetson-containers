@@ -35,10 +35,10 @@ USE_PYTORCH_QNNPACK=0 \
 USE_NATIVE_ARCH=1 \
 USE_DISTRIBUTED=1 \
 USE_TENSORRT=0 \
-CC=/usr/bin/clang \
-CMAKE_C_COMPILER=/usr/bin/clang \
-CXX=/usr/bin/clang++ \
-CMAKE_CXX_COMPILER=/usr/bin/clang++ \
+CC=/usr/bin/gcc \
+CMAKE_C_COMPILER=/usr/bin/gcc \
+CXX=/usr/bin/g++ \
+CMAKE_CXX_COMPILER=/usr/bin/g++ \
 python3 setup.py bdist_wheel --dist-dir /opt
 
 cd /
