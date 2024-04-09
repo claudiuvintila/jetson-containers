@@ -34,6 +34,8 @@ USE_PYTORCH_QNNPACK=0 \
 USE_NATIVE_ARCH=1 \
 USE_DISTRIBUTED=1 \
 USE_TENSORRT=0 \
+export CC=/usr/bin/clang \
+export CXX=/usr/bin/clang++ \
 python3 setup.py bdist_wheel --dist-dir /opt
 
 cd /
