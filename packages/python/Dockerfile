@@ -55,7 +55,7 @@ RUN wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/nul
     apt-get install -y --no-install-recommends kitware-archive-keyring && \
     apt-cache policy cmake && \
     apt-get install -y --no-install-recommends cmake \
-    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /var/lib/apt/lists/* /etc/apt/sources.list.d/kitware.list \
     && apt-get clean
 
 # prepare headers
