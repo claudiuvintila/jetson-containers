@@ -50,14 +50,30 @@ RUN pip3 install --upgrade setuptools==59.5.0 pip wheel \
   && pip3 install MarkupSafe==2.0.0 Cython==0.29.37
 
 RUN cd /opt && \
-    git clone --depth 1 --branch v${TORCH_VERSION} https://github.com/pytorch/pytorch \
-    && cd pytorch \
-    && git submodule sync \
-    && git submodule update --init --recursive \
-    && pip3 install -r requirements.txt \
-    && export PYTORCH_BUILD_VERSION=$(git describe --tags --exact | sed 's/^v//') \
-    && export PYTORCH_BUILD_NUMBER=0 \
-    && python3 setup.py bdist_wheel
+    apt-get update && \
+    apt-get install \
+          libopenblas-dev \
+          libopenmpi-dev \
+          openmpi-bin \
+          openmpi-common \
+          gfortran \
+          libomp-dev && \
+    git clone --depth 1 --branch v${TORCH_VERSION} https://github.com/pytorch/pytorch && \
+    cd pytorch && \
+    git submodule sync && \
+    git submodule update --init --recursive && \
+    pip3 install -r requirements.txt && \
+    export PYTORCH_BUILD_VERSION=$(git describe --tags --exact | sed 's/^v//') && \
+    export PYTORCH_BUILD_NUMBER=0 && \
+    export PYTORCH_BUILD_NUMBER=1 && \
+    export TORCH_CXX_FLAGS="-D_GLIBCXX_USE_CXX11_ABI=0" && \
+    export USE_NCCL=0 && \
+    export USE_QNNPACK=0 && \
+    export USE_PYTORCH_QNNPACK=0 && \
+    export USE_NATIVE_ARCH=1 && \
+    export USE_DISTRIBUTED=1 && \
+    export USE_TENSORRT=0 && \
+    python3 setup.py bdist_wheel
 
 # install prerequisites
 RUN apt-get update && \
