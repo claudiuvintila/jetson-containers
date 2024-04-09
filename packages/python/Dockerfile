@@ -63,6 +63,7 @@ RUN mkdir /workspace && \
     cd /workspace && \
     mkdir python${PY_VERSION} && \
     mkdir python${PY_VERSION}/include && \
+    apt-get update && \
     apt-get download libpython${PY_VERSION}-dev && \
     ar x libpython${PY_VERSION}-dev_${PYTHON_VERSION}-*_arm64.deb && \
     tar -xvf data.tar.xz && \
