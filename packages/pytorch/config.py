@@ -129,7 +129,6 @@ package = [
     
     # JetPack 4
 
-    pytorch_pip('2.2', requires='==32.*'),
     pytorch_pip('1.10', requires='==32.*'),
     pytorch_pip('1.9', requires='==32.*'),
     #pytorch('1.11', 'torch-1.11.0a0+17540c5-cp36-cp36m-linux_aarch64.whl', 'https://developer.download.nvidia.com/compute/redist/jp/v461/pytorch/torch-1.11.0a0+17540c5+nv22.01-cp36-cp36m-linux_aarch64.whl', '==32.*'),  # (built without LAPACK support)

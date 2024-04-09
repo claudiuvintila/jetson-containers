@@ -23,6 +23,9 @@ cd /opt/pytorch
 pip3 install --no-cache-dir -r requirements.txt
 pip3 install --no-cache-dir scikit-build ninja
 
+sed -i 's/import future/import future distutils.version/g' setup.py
+
+
 PYTORCH_BUILD_NUMBER=1 \
 TORCH_CXX_FLAGS="-D_GLIBCXX_USE_CXX11_ABI=0" \
 USE_NCCL=0 \
