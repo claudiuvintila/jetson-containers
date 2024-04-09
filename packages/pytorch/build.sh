@@ -34,8 +34,8 @@ USE_PYTORCH_QNNPACK=0 \
 USE_NATIVE_ARCH=1 \
 USE_DISTRIBUTED=1 \
 USE_TENSORRT=0 \
-export CC=/usr/bin/clang \
-export CXX=/usr/bin/clang++ \
+CC=/usr/bin/clang \
+CXX=/usr/bin/clang++ \
 python3 setup.py bdist_wheel --dist-dir /opt
 
 cd /
@@ -46,8 +46,3 @@ pip3 install /opt/torch*.whl
 python3 -c 'import torch; print(f"PyTorch version: {torch.__version__}"); print(f"CUDA available:  {torch.cuda.is_available()}"); print(f"cuDNN version:   {torch.backends.cudnn.version()}"); print(torch.__config__.show());'
 twine upload --verbose /opt/torch*.whl || echo "failed to upload wheel to ${TWINE_REPOSITORY_URL}"
 
-export TORCH_CUDA_ARCH_ARGS="5.3;6.2;7.2"
-export TORCH_VERSION="1.10"
-export PYTORCH_BUILD_VERSION="1.10.0"
-export TORCH_CUDA_ARCH_LIST=${TORCH_CUDA_ARCH_ARGS}
-export TORCH_HOME=/data/models/torch
