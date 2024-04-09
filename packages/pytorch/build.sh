@@ -12,7 +12,8 @@ apt-get install -y --no-install-recommends \
         openmpi-bin \
         openmpi-common \
         gfortran \
-        libomp-dev
+        libomp-dev \
+        clang
 rm -rf /var/lib/apt/lists/*
 apt-get clean
 
