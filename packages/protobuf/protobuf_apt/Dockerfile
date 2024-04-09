@@ -9,16 +9,16 @@ ARG BASE_IMAGE
 FROM ${BASE_IMAGE}
 
 # confirm first that the protobuf:cpp package isn't already installed
-#RUN if [ -z "$(which protoc)" ]; then \
-#        apt-get update; \
-#	   apt-get install -y --no-install-recommends \
-#	       protobuf-compiler \
-#		  libprotoc-dev \
-#		  libprotobuf-dev; \
-#	   rm -rf /var/lib/apt/lists/*; \
-#	   apt-get clean; \
-#	   pip3 install --upgrade --no-cache-dir --verbose protobuf; \
-#    fi
+RUN if [ -z "$(which protoc)" ]; then \
+        apt-get update; \
+	   apt-get install -y --no-install-recommends \
+	       protobuf-compiler \
+		  libprotoc-dev \
+		  libprotobuf-dev; \
+	   rm -rf /var/lib/apt/lists/*; \
+	   apt-get clean; \
+	   pip3 install --upgrade --no-cache-dir --verbose protobuf; \
+    fi
     
 RUN pip3 install --upgrade --no-cache-dir --verbose protobuf==3.20.* &&\
     pip3 show protobuf && protoc --version
