@@ -51,7 +51,7 @@ RUN pip3 install --upgrade setuptools==59.5.0 pip wheel \
 
 RUN cd /opt && \
     apt-get update && \
-    apt-get install \
+    apt-get install -y \
           libopenblas-dev \
           libopenmpi-dev \
           openmpi-bin \
