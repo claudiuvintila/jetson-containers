@@ -34,7 +34,7 @@ RUN apt-get update && \
     \
     pip3 install --no-cache-dir --verbose wget psutil
 
-#SHELL ["/bin/bash", "-c"]
+SHELL ["/bin/bash", "-c"]
 ## cmake
 #RUN apt-get update && \
 #    apt-get install -y protobuf-compiler libprotobuf-dev openssl libssl-dev libcurl4-openssl-dev && \
