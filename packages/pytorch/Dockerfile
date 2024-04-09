@@ -73,8 +73,8 @@ RUN cd /opt && \
     export USE_NATIVE_ARCH=1 && \
     export USE_DISTRIBUTED=1 && \
     export USE_TENSORRT=0 && \
-    export CC=/usr/bin/clang && \
-    export CXX=/usr/bin/clang++ && \
+    export CC=/usr/bin/gcc && \
+    export CXX=/usr/bin/g++ && \
     python3 setup.py bdist_wheel
 
 # install prerequisites
