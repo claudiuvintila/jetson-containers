@@ -17,6 +17,5 @@ RUN set -ex \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get clean \
     \
-    && pip3 show numpy && python3 -c 'import numpy; print(numpy.__version__)' \
     && pip3 install --upgrade --no-cache-dir --verbose numpy \
     && pip3 show numpy && python3 -c 'import numpy; print(numpy.__version__)'
