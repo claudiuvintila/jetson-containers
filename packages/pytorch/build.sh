@@ -23,7 +23,7 @@ cd /opt/pytorch
 pip3 install --no-cache-dir -r requirements.txt
 pip3 install --no-cache-dir scikit-build ninja
 
-sed -i 's/import future/import future distutils.version/g' setup.py
+sed -i "s/from setuptools/import distutils.version\nfrom setuptools/g" setup.py
 
 
 PYTORCH_BUILD_NUMBER=1 \
@@ -43,3 +43,9 @@ rm -rf /opt/pytorch
 pip3 install /opt/torch*.whl
 python3 -c 'import torch; print(f"PyTorch version: {torch.__version__}"); print(f"CUDA available:  {torch.cuda.is_available()}"); print(f"cuDNN version:   {torch.backends.cudnn.version()}"); print(torch.__config__.show());'
 twine upload --verbose /opt/torch*.whl || echo "failed to upload wheel to ${TWINE_REPOSITORY_URL}"
+
+export TORCH_CUDA_ARCH_ARGS="5.3;6.2;7.2"
+export TORCH_VERSION="1.10"
+export PYTORCH_BUILD_VERSION="1.10.0"
+export TORCH_CUDA_ARCH_LIST=${TORCH_CUDA_ARCH_ARGS}
+export TORCH_HOME=/data/models/torch
