@@ -35,7 +35,9 @@ USE_NATIVE_ARCH=1 \
 USE_DISTRIBUTED=1 \
 USE_TENSORRT=0 \
 CC=/usr/bin/clang \
+CMAKE_C_COMPILER=/usr/bin/clang \
 CXX=/usr/bin/clang++ \
+CMAKE_CXX_COMPILER=/usr/bin/clang++ \
 python3 setup.py bdist_wheel --dist-dir /opt
 
 cd /
