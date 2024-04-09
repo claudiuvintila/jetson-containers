@@ -34,22 +34,33 @@ RUN apt-get update && \
     \
     pip3 install --no-cache-dir --verbose wget psutil
 
-SHELL ["/bin/bash", "-c"]
-# cmake
-RUN apt-get update && \
-    apt-get install -y protobuf-compiler libprotobuf-dev openssl libssl-dev libcurl4-openssl-dev && \
-    mkdir /workspace && \
-    cd /workspace && \
-    wget https://github.com/Kitware/CMake/releases/download/v3.13.5/cmake-3.13.5.tar.gz && \
-    tar xvf cmake-3.13.5.tar.gz > /dev/null && \
-    cd cmake-3.13.5 && \
-    ./bootstrap --system-curl && \
-    make -j$(nproc) && \
-    make install && \
-    cd ..
+#SHELL ["/bin/bash", "-c"]
+## cmake
+#RUN apt-get update && \
+#    apt-get install -y protobuf-compiler libprotobuf-dev openssl libssl-dev libcurl4-openssl-dev && \
+#    mkdir /workspace && \
+#    cd /workspace && \
+#    wget https://github.com/Kitware/CMake/releases/download/v3.13.5/cmake-3.13.5.tar.gz && \
+#    tar xvf cmake-3.13.5.tar.gz > /dev/null && \
+#    cd cmake-3.13.5 && \
+#    ./bootstrap --system-curl && \
+#    make -j$(nproc) && \
+#    make install && \
+#    cd ..
+
+RUN wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | tee /usr/share/keyrings/kitware-archive-keyring.gpg >/dev/null && \
+    echo "deb [signed-by=/usr/share/keyrings/kitware-archive-keyring.gpg] https://apt.kitware.com/ubuntu/ $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/kitware.list >/dev/null && \
+    apt-get update && \
+    rm /usr/share/keyrings/kitware-archive-keyring.gpg && \
+    apt-get install -y --no-install-recommends kitware-archive-keyring && \
+    apt-cache policy cmake && \
+    apt-get install -y --no-install-recommends cmake \
+    && rm -rf /var/lib/apt/lists/* \
+    && apt-get clean
 
 # prepare headers
-RUN cd /workspace && \
+RUN mkdir /workspace && \
+    cd /workspace && \
     mkdir python${PY_VERSION} && \
     mkdir python${PY_VERSION}/include && \
     apt-get download libpython${PY_VERSION}-dev && \
@@ -75,7 +86,6 @@ RUN cd /workspace && \
     cd python && \
     export PYTHON_MAJOR_VERSION=3 && \
     export PYTHON_MINOR_VERSION=8 && \
-    export TARGET=aarch64 && \
     export TARGET=aarch64 && \
     export TRT_OSSPATH=${PWD}/.. && \
     export EXT_PATH=${PWD}/../.. && \
