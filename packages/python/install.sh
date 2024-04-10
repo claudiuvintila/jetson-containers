@@ -6,7 +6,7 @@ apt-get update
 apt-get install -y --no-install-recommends \
 	python${PYTHON_VERSION} \
 	python${PYTHON_VERSION}-dev
-	python${PYTHON_VERSION}-setuptools \
+	python${PYTHON_VERSION}-setuptools
 
 which python${PYTHON_VERSION}
 return_code=$?
