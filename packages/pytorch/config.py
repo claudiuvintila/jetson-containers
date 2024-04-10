@@ -138,5 +138,5 @@ package = [
     # Build from source
     #pytorch_build('2.0', suffix='distributed', requires='==35.*'),            
     #pytorch_build('2.1', suffix='distributed', requires='==35.*', alias='pytorch:distributed'),        
-    pytorch_build('1.10', suffix='builder', requires='==32.*'),
+    # pytorch_build('1.10', suffix='builder', requires='==32.*'),
 ]
