@@ -16,13 +16,16 @@ ARG PYTHON_VERSION=3.6.9
 ARG PY_VERSION=3.6
 
 # prepare headers
-RUN cd /opt && \
+RUN mkdir /workspace && \
+    cd /workspace && \
     mkdir python${PY_VERSION} && \
     mkdir python${PY_VERSION}/include && \
-    wget http://ftp.us.debian.org/debian/pool/main/p/python${PY_VERSION}/libpython${PY_VERSION}-dev_${PYTHON_VERSION}-1_arm64.deb && \
-    ar x libpython${PY_VERSION}-dev_${PYTHON_VERSION}-1_arm64.deb && \
+    apt-get download libpython${PY_VERSION}-dev && \
+    ar x libpython${PY_VERSION}-dev_${PYTHON_VERSION}-*_arm64.deb && \
     tar -xvf data.tar.xz && \
     cp ./usr/include/aarch64-linux-gnu/python${PY_VERSION}/pyconfig.h python${PY_VERSION}/include/ && \
+    wget https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tgz && \
+    tar xzf Python-${PYTHON_VERSION}.tgz > /dev/null && \
     cp -r Python-${PYTHON_VERSION}/Include/* python${PY_VERSION}/include/ && \
     ls -las
 
